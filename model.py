@@ -32,7 +32,7 @@ class Task(Abstract, Base):
     deadline = Column(Date)
     status = Column(Boolean, default=0)
 
-    author = relationship(User)
+    author = relationship("User")
 
     def __str__(self):
         return ' | '. join([self.id, self.title, self.status])
