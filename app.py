@@ -11,6 +11,8 @@ def index():
         email = request.form['email']
         password = request.form['password']
         password_check = request.form['password_check']
+        if password != password_check:
+            return render_template('index.html', error='passwords_dont_match')
         add_user(name, email, password)
         return redirect('/users/' + name)
     return render_template('index.html')

@@ -1,13 +1,17 @@
 <h1>WAYGDA - What Are You Gonna Do App</h1>
 
+{% if error == passwords_dont_match %}
+<p>Passwords aren't similar</p>
+{% endif %}
+
 <form method="POST">
     <label>Name</label>
-    <input name="name"><br/>
+    <input minlength="5" maxlength="20" name="name" required><br/>
     <label>e-mail</label>
-    <input name="email"><br/>
+    <input type="email" maxlength="30" name="email" required><br/>
     <label>Password</label>
-    <input name="password"><br/>
+    <input type="password" minlength="6" maxlength="20" name="password" required><br/>
     <label>Password</label>
-    <input name="password_check"><br/>
+    <input type="password" minlength="6" maxlength="20" name="password_check" required><br/>
     <input type="submit" value="Send">
 </form>
