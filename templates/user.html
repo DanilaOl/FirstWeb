@@ -1,3 +1,9 @@
+{% if name != session['account'] %}
+<p>Something went wrong, please go to Log In / <a href={{ url_for('index') }}>Sign Up</a></p>
+
+{% else %}
 <h1>Test</h1>
 <p>Hello, {{name|title}}!</p>
 <p>What did you eat for breakfast?</p>
+<a href={{ url_for('loguot') }}>Log Out</a>
+{% endif %}

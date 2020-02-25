@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from model import add_user
-from sqlalchemy.exc import IntegrityError
 from model import AccountExists
 
+
 app = Flask(__name__)
+app.secret_key = 'megapasswordnagibator'
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -19,6 +20,7 @@ def index():
             add_user(name, email, password)
         except AccountExists:
             return render_template('index.html', error='account_already_exists')
+        session['account'] = name
         return redirect('/users/' + name)
     return render_template('index.html')
 
@@ -26,6 +28,12 @@ def index():
 @app.route('/users/<name>')
 def user_page(name):
     return render_template('user.html', name=name)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('account', None)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
