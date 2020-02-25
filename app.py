@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from model import add_user
+from sqlalchemy.exc import IntegrityError
+from model import AccountExists
 
 app = Flask(__name__)
 
@@ -13,7 +15,10 @@ def index():
         password_check = request.form['password_check']
         if password != password_check:
             return render_template('index.html', error='passwords_dont_match')
-        add_user(name, email, password)
+        try:
+            add_user(name, email, password)
+        except AccountExists:
+            return render_template('index.html', error='account_already_exists')
         return redirect('/users/' + name)
     return render_template('index.html')
 

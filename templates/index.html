@@ -1,7 +1,9 @@
 <h1>WAYGDA - What Are You Gonna Do App</h1>
 
-{% if error == passwords_dont_match %}
+{% if error == 'passwords_dont_match' %}
 <p>Passwords aren't similar</p>
+{% elif error == 'account_already_exists'%}
+<p>Sorry, account with this email is already exists</p>
 {% endif %}
 
 <form method="POST">
