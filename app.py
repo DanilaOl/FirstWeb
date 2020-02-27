@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from model import add_user, check_user
-from model import AccountExists
+from model import AccountExists, AccountNotFound
 
 
 app = Flask(__name__)
@@ -31,17 +31,17 @@ def user_page(name):
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login:
+def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
         try:
-            check_user(email, password)
-        except AccountExists:
-            return render_template('index.html', error='account_already_exists')
+            name = check_user(email, password)
+        except AccountNotFound:
+            return render_template('login.html', error=True)
         session['account'] = name
         return redirect('/users/' + name)
-    return render_template('index.html')
+    return render_template('login.html')
 
 
 @app.route('/logout')

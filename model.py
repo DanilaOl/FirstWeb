@@ -68,8 +68,9 @@ def add_user(name, email, password):
 def check_user(email, password):
     engine = create_engine('sqlite:///app.db', echo=True)
     session = Session(bind=engine)
-    user = session.query(Users).filter_by(email=email, password=password).first()
+    user = session.query(User).filter_by(email=email, password=password).first()
+    session.close()
     if not user:
-
+        raise AccountNotFound
     return user.username
 
