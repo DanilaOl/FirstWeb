@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from model import add_user
+from model import add_user, check_user
 from model import AccountExists
 
 
@@ -28,6 +28,20 @@ def index():
 @app.route('/users/<name>')
 def user_page(name):
     return render_template('user.html', name=name)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login:
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        try:
+            check_user(email, password)
+        except AccountExists:
+            return render_template('index.html', error='account_already_exists')
+        session['account'] = name
+        return redirect('/users/' + name)
+    return render_template('index.html')
 
 
 @app.route('/logout')

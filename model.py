@@ -14,6 +14,11 @@ class AccountExists(Exception):
     Email already in database
     """
 
+class AccountNotFound(Exception):
+    """
+    Account not found in db
+    """
+
 class Abstract():
     id = Column(Integer, primary_key=True)
     created_on = Column(Date, default=date.today())
@@ -58,3 +63,13 @@ def add_user(name, email, password):
         raise AccountExists(Exception)
     finally:
         session.close()
+
+
+def check_user(email, password):
+    engine = create_engine('sqlite:///app.db', echo=True)
+    session = Session(bind=engine)
+    user = session.query(Users).filter_by(email=email, password=password).first()
+    if not user:
+
+    return user.username
+
