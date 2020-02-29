@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from model import add_user, check_user
+from model import add_user, check_user, get_user_tasks
 from model import AccountExists, AccountNotFound
 
 
@@ -27,7 +27,8 @@ def index():
 
 @app.route('/users/<name>')
 def user_page(name):
-    return render_template('user.html', name=name)
+    user_tasks = get_user_tasks(name)
+    return render_template('user.html', name=name, tasks=user_tasks)
 
 
 @app.route('/login', methods=['GET', 'POST'])

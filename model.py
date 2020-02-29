@@ -14,10 +14,12 @@ class AccountExists(Exception):
     Email already in database
     """
 
+
 class AccountNotFound(Exception):
     """
     Account not found in db
     """
+
 
 class Abstract():
     id = Column(Integer, primary_key=True)
@@ -74,3 +76,23 @@ def check_user(email, password):
         raise AccountNotFound
     return user.username
 
+
+def get_user_tasks(name):
+    engine = create_engine('sqlite:///app.db', echo=True)
+    session = Session(bind=engine)
+    user = session.query(User).filter_by(username=name).first()
+    user_tasks = user.tasks
+    session.close()
+
+    return user_tasks
+
+
+def create_user_task(name, title, details='', deadline=None):
+    engine = create_engine('sqlite:///app.db', echo=True)
+    session = Session(bind=engine)
+    user = session.query(User).filter_by(username=name).first()
+    user_tasks = user.tasks
+    new_task = Task(title=title, details=details, deadline=deadline)
+    user_tasks.append(new_task)
+    session.commit()
+    session.close()
