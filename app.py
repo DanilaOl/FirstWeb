@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from model import add_user, check_user, get_user_tasks
+from model import add_user, check_user, get_user_tasks, change_user_task, remove_user_task
 from model import AccountExists, AccountNotFound
 
 
@@ -49,6 +49,18 @@ def login():
 def logout():
     session.pop('account', None)
     return redirect(url_for('index'))
+
+
+@app.route('/status/<int:id>')
+def change_status(id):
+    change_user_task(session['account'], id)
+    return redirect(url_for('user_page', name=session['account']))
+
+
+@app.route('/remove/<int:id>')
+def remove_task(id):
+    remove_user_task(session['account'], id)
+    return {"message": "Task was deleted"}, 200
 
 
 if __name__ == '__main__':
