@@ -3,6 +3,7 @@ from sqlalchemy import (Column, Integer, String, Boolean, Text, Date, ForeignKey
 from sqlalchemy.orm import relationship, Session
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import IntegrityError
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 engine = create_engine('sqlite:///app.db', echo=True)
@@ -57,7 +58,7 @@ class Task(Abstract, Base):
 def add_user(name, email, password):
     engine = create_engine('sqlite:///app.db', echo=True)
     session = Session(bind=engine)
-    user = User(username=name, email=email, password=password)
+    user = User(username=name, email=email, password=generate_password_hash(password))
     try:
         session.add(user)
         session.commit()
@@ -70,9 +71,9 @@ def add_user(name, email, password):
 def check_user(email, password):
     engine = create_engine('sqlite:///app.db', echo=True)
     session = Session(bind=engine)
-    user = session.query(User).filter_by(email=email, password=password).first()
+    user = session.query(User).filter_by(email=email).first()
     session.close()
-    if not user:
+    if not user or not check_password_hash(user.password, password):
         raise AccountNotFound
     return user.username
 

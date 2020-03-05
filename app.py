@@ -63,5 +63,10 @@ def remove_task(id):
     return {"message": "Task was deleted"}, 200
 
 
+@app.errorhandler(404)
+def not_found_error():
+    return render_template('not_found.html'), 404
+
+
 if __name__ == '__main__':
     app.run(debug=True)
