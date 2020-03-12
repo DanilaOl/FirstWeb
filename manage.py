@@ -13,7 +13,7 @@ def reset_db():
 
 
 @cli.command('fill_users')
-def fill_db():
+def fill_fill():
     with open('MOCK_USERS.json') as f:
         mock = json.load(f)
     for i in mock:
