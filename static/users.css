@@ -1,17 +1,25 @@
-* {
-	border: 1px solid black;
+*
+{
+    border: 1px solid black;
 }
 
-body {
-	height: initial;
+body
+{
+    height: initial;
 }
 
-div.card {
-	width: 220px;
-	margin: 20px;
+div.card
+{
+    width: 220px;
+    margin: 20px;
 }
 
-div.card-img {
-	height: 100px;
-	background: center / cover no-repeat url(../templates/img/Megumin_Padoru.jpg)
+div.card-img
+{
+    height: 100px;
+    width: 100%;
+    background: url(../static/Megumin_Padoru.jpg);
+	background-size: cover;
+    background-position: center;
+
 }
