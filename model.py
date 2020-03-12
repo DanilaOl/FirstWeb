@@ -22,7 +22,7 @@ class AccountNotFound(Exception):
     """
 
 
-class Abstract():
+class Abstract:
     id = Column(Integer, primary_key=True)
     created_on = Column(Date, default=date.today())
 
@@ -105,7 +105,7 @@ def change_user_task(username, id):
     user = session.query(User).filter_by(username=username).first()
     user_tasks = user.tasks
     task_to_change = user_tasks[id-1]
-    task_to_change.status = not(task_to_change.status)
+    task_to_change.status = not task_to_change.status
     session.commit()
     session.close()
 
@@ -114,9 +114,7 @@ def remove_user_task(username, id):
     engine = create_engine('sqlite:///app.db', echo=True)
     session = Session(bind=engine)
     user = session.query(User).filter_by(username=username).first()
-    user_tasks = user.tasks
     task_to_remove = user.tasks[id-1]
     session.delete(task_to_remove)
     session.commit()
     session.close()
-

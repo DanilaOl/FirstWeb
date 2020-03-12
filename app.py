@@ -64,7 +64,7 @@ def remove_task(id):
 
 
 @app.errorhandler(404)
-def not_found_error():
+def not_found_error(error):
     return render_template('not_found.html'), 404
 
 

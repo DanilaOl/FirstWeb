@@ -10,7 +10,7 @@ body
     height: 100vh;
     margin: 0;
 
-    background-color: #754574;
+    background-color: #b0e0ff;
 
     justify-content: center;
 }
@@ -32,8 +32,8 @@ form
 
     border: 1px solid #000;
     border-radius: 8px;
-    background-color: rgba(170, 147, 105, .7);
-    box-shadow: 2px 1px black;
+    background-color: #cd94ff;
+    box-shadow: 7px 7px 25px -5px black;
 }
 
 form *
@@ -53,7 +53,7 @@ input
     border: 0;
     border-radius: 8px;
     outline: none;
-    background: rgba(255, 255, 255, .7);
+    background: #fff;
 }
 
 input[type='submit']
@@ -71,9 +71,9 @@ input[type='submit']:hover
 {
     transition: filter .2s;
     transition: transform .2s;
-    transform: scale(.98);
+    transform: scale(1.02);
 
-    filter: drop-shadow(1px 2px black);
+    filter: drop-shadow(1.5px 1.5px 2px black);
 }
 
 a
@@ -83,7 +83,7 @@ a
     text-align: center;
     text-decoration: none;
 
-    color: rgb(60, 60, 158);
+    color: #1c1cb8;
 }
 
 label
