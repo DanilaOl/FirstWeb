@@ -12,12 +12,17 @@ def reset_db():
     Base.metadata.create_all()
 
 
-@cli.command('fill_db')
+@cli.command('fill_users')
 def fill_db():
     with open('MOCK_DATA.json') as f:
         mock = json.load(f)
     for i in mock:
         add_user(**i)
+
+
+@cli.command('dill_tasks')
+def fill_tasks():
+    
 
 
 cli()
