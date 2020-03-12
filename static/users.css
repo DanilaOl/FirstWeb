@@ -1,0 +1,17 @@
+* {
+	border: 1px solid black;
+}
+
+body {
+	height: initial;
+}
+
+div.card {
+	width: 220px;
+	margin: 20px;
+}
+
+div.card-img {
+	height: 100px;
+	background: center / cover no-repeat url(../templates/img/Megumin_Padoru.jpg)
+}

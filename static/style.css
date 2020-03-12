@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Bellota+Text|Inter:400,700&display=swap&subset=cyrillic');
+
+body {
+    font-family: 'Bellota Text', cursive;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+    margin: 0;
+
+    background-color: #754574;
+
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Inter', sans-serif;
+
+    text-align: center;
+}
+
+form {
+    width: 20%;
+    margin: 10px auto;
+    padding: 5px;
+
+    text-align: center;
+
+    border: 1px solid rgb(0, 0, 0)	;
+    border-radius: 8px;
+    background-color: rgba(170, 147, 105, .5);
+    box-shadow: 2px 1px black;
+}
+
+form * {
+    display: block;
+}
+
+input {
+    width: 100%;
+    margin: 0 auto;
+    line-height: 28px;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.7);
+    border: 0;
+    text-align: center;
+}
+
+input[type='submit'] {
+    font-size: 1.4rem;
+
+    width: 60%;
+    margin: 10px auto;
+
+    text-transform: uppercase;
+    cursor: pointer;
+
+}
+
+input[type='submit']:hover {
+	filter: drop-shadow(1px 2px black);
+	transform: scale(0.98);
+	transition: filter .2s;
+	transition: transform .2s;
+}
+a {
+    font-size: .7rem;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: rgb(60, 60, 158);
+}
+
+label {
+    margin-bottom: 6px;
+}
