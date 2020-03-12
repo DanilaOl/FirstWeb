@@ -1,5 +1,5 @@
 import json
-from model import Base, add_user
+from model import Base, add_user, create_user_task
 from flask.cli import FlaskGroup
 from app import app
 
@@ -14,17 +14,18 @@ def reset_db():
 
 @cli.command('fill_users')
 def fill_db():
-    with open('MOCK_DATA.json') as f:
+    with open('MOCK_USERS.json') as f:
         mock = json.load(f)
     for i in mock:
         add_user(**i)
 
 
-@cli.command('dill_tasks')
+@cli.command('fill_tasks')
 def fill_tasks():
-    
+    with open('MOCK_TASKS.json') as f:
+        mock = json.load(f)
+    for i in mock:
+        create_user_task(**i)
 
 
 cli()
-# reset_db()
-# fill_db()
