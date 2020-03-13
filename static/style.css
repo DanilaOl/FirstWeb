@@ -7,15 +7,17 @@ body
     display: flex;
     flex-direction: column;
 
-    height: 100vh;
-    margin: 0;
+    /*height: 100vh;
+    margin: 0;*/
 
-    background-color: #b0e0ff;
+    background: url(bg.jpg);
+    background-position: center;
+    background-size: cover;
 
     justify-content: center;
 }
 
-h1
+h1, h2
 {
     font-family: 'Inter', sans-serif;
 
@@ -84,6 +86,7 @@ a
     text-decoration: none;
 
     color: #1c1cb8;
+    text-shadow: 1px 1px 4px #777777;
 }
 
 label

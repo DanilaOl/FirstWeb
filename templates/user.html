@@ -11,9 +11,9 @@
 </p>
 
 {% else %}
+    <a href={{ url_for('logout') }}>Log Out</a>
     <h1>WAYGDA - What Are You Gonna Do App</h1>
-    <p>Hello, {{name|title}}!</p>
-    <p>What did you eat for breakfast?</p>
+    <p id="hello">Hello, {{name|title}}!</p>
 
     <div class="wrapper">
         {% for task in tasks %}
@@ -25,14 +25,36 @@
             {% if task.deadline %}
             <p class="card-deadline">Deadline: {{ task.deadline }}</p>
             {% endif %}
-            <div class="card_ui">
+            <div class="card-ui">
                 <a href={{ "/status/" + loop.index|string }}>Change Status</a>
                 <a href="#" onclick=remove_task(event)>Remove</a>
             </div>
         </div>
+
         {% endfor %}
     </div>
+    <form method="POST">
+        <label>Title</label>
+        <input 
+            minlength="5" 
+            maxlength="20" 
+            name="title" 
+            placeholder="What to do" 
+            required>
+        <br/>
+        <label>Details</label>
+        <input 
+            name="details" 
+            placeholder="Type details">
+        <br/>
+        <label>Deadline</label>
+        <input 
+            type="date" 
+            name="deadline" 
+            placeholder="optional" >
+        <br/>
+        <input type="submit" value="Send">
+    </form>
 
-<a href={{ url_for('logout') }}>Log Out</a>
 <script src="{{ url_for('static', filename="script.js") }}"></script>
 {% endif %}

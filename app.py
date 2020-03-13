@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from model import add_user, check_user, get_user_tasks, change_user_task, remove_user_task
+from flask import Flask, render_template, request, redirect, url_for, session, abort
+from model import add_user, check_user, get_user_tasks, change_user_task, remove_user_task, create_user_task, get_id_by_name
 from model import AccountExists, AccountNotFound
 
 
@@ -25,9 +25,22 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/users/<name>')
+@app.route('/users/<name>', methods=['GET', 'POST'])
 def user_page(name):
-    user_tasks = get_user_tasks(name)
+    if request.method == 'POST':
+        title = request.form['title']
+        details = request.form['details']
+        deadline = request.form['deadline']
+        try:
+            author_id = get_id_by_name(name)
+        except AccountNotFound:
+            abort(404)
+        create_user_task(author_id, title, details, deadline)
+
+    try:
+        user_tasks = get_user_tasks(name)
+    except AccountNotFound:
+        abort(404)
     return render_template('user.html', name=name, tasks=user_tasks)
 
 
