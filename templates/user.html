@@ -11,7 +11,7 @@
 </p>
 
 {% else %}
-    <a href={{ url_for('logout') }}>Log Out</a>
+    <a href={{ url_for('logout') }} class="logout">LOG OUT</a>
     <h1>WAYGDA - What Are You Gonna Do App</h1>
     <p id="hello">Hello, {{name|title}}!</p>
 
@@ -20,6 +20,7 @@
         <div id={{ loop.index|string }} class="card">
             <div class="card-img"></div>
             <h2 class="card-heading">{{ task.title }}</h2>
+            <p class="card-status">{{ task.status }}</p>
             <p class="card-details">{{ task.details }}</p>
             <p class="card-start-date">Created: {{ task.created_on }}</p>
             {% if task.deadline %}
@@ -56,5 +57,6 @@
         <input type="submit" value="Send">
     </form>
 
+    <a id="form-toggler">ADD TASK</a>
 <script src="{{ url_for('static', filename="script.js") }}"></script>
 {% endif %}
