@@ -36,6 +36,7 @@ def user_page(name):
         except AccountNotFound:
             abort(404)
         create_user_task(author_id, title, details, deadline)
+        return redirect('/users/' + name)
 
     try:
         user_tasks = get_user_tasks(name)

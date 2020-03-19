@@ -4,7 +4,7 @@
 </head>
 
 {% if name != session['account'] %}
-<p>
+<p class="error">
     Something went wrong, please go to
     <a href={{ url_for('login') }}>Log In</a> /
     <a href={{ url_for('index') }}>Sign Up</a>
